@@ -1,0 +1,11 @@
+Description of program:
+CAN buses allow for units within a vehicle to communicate with each other. Securing these networks to ensure that only intended communications pass through is very important, as unauthorized messages can be very dangerous. For example, a hacker with access to the car, either physically, or remotely (if the car is connected to an external network) may turn off a vehicle's engine while the car is moving.
+Thus, it is very important that CAN buses use secure communication protocols so that only authorized communications are possible.
+This program demonstrates a vehicle CAN bus simulator demonstrating 3 modes of security:
+A)	No security.
+a.	The CAN bus is hacked simply by a device connected to the system which listens in on the communications, and when the vehicle speed exceeds a certain threshold, it turns off the engine. 
+B)	The receiver of a signal must check the digital signature (using RSA) that was left by the sender of the signal to check that it was sent by an authorized unit on the network. 
+a.	The CAN bus is hacked through a replay attack. The snooping device catches all messages on the network, and replays one of them at a later time. This defeats security through digital signatures.
+C)	Security included in B, plus the security protocol mentioned in this research paper, which defends against replay attacks. 
+http://kr.vector.com/portal/medien/cmc/press/RDI/Security_CAN_Newsletter_201411_PressArticle_EN.pdf
+The authors propose that the sender and receiver generate a random number, which is shared between them. Each time the sender communicates with the receiver, it increments the number and includes it in the message. The receiver will also increment its version of the number and check if the numbers are equal. If they are not, then reject the message. 
